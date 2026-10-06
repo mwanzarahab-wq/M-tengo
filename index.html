@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mitengo</title>
+<meta name="theme-color" content="#E5202E">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Mitengo">
+<meta name="mobile-web-app-capable" content="yes">
+<style>
+:root{--red:#E5202E;--red-d:#B3121E;--orange:#FF7A00;--yellow:#FFD21F;--cream:#FFF6C8;--ink:#2B1200;--mute:#7A5A3A;--line:#F2D98A;--card:#fff;--good:#0B8F3E;--bad:#B3121E;--display:"Arial Black","Helvetica Neue",Impact,Arial,sans-serif;color-scheme:light;
+--gold:linear-gradient(135deg,#FFF3A0 0%,#FFD21F 30%,#F0A500 58%,#FFE56B 80%,#FFC400 100%);
+--gold-flat:linear-gradient(180deg,#FFE86B 0%,#FFD21F 50%,#F5B400 100%);
+--red-gloss:linear-gradient(180deg,#FF4A55 0%,#E5202E 48%,#B3121E 100%);
+--orange-gloss:linear-gradient(180deg,#FFA23A 0%,#FF7A00 50%,#E05E00 100%);
+--star:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath fill='%23FFF3A0' d='M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z'/%3E%3C/svg%3E")}
+*{box-sizing:border-box}
+body{margin:0;background-color:var(--cream);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath fill='%23F0A500' fill-opacity='.55' d='M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z'/%3E%3C/svg%3E"),radial-gradient(#FFD21F88 1.6px,transparent 1.6px);background-size:140px 140px,20px 20px;background-position:30px 50px,0 0;color:var(--ink);font:16px/1.5 "Trebuchet MS",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding-bottom:calc(68px + env(safe-area-inset-bottom))}
+header{background:var(--red-gloss);color:#fff;padding:calc(12px + env(safe-area-inset-top)) 16px 14px;position:sticky;top:0;z-index:5;margin-bottom:12px;border-bottom:3px solid #F0A500;box-shadow:0 3px 0 #FFF3A0}
+header::before{content:"";position:absolute;inset:0;pointer-events:none;background:var(--star) 8% 28%/11px no-repeat,var(--star) 72% 14%/15px no-repeat,var(--star) 91% 62%/10px no-repeat,var(--star) 46% 86%/9px no-repeat,var(--star) 28% 12%/8px no-repeat;animation:tw 3.4s ease-in-out infinite}
+header::after{content:"";position:absolute;left:0;right:0;bottom:-16px;height:10px;background:linear-gradient(135deg,#F0A500 50%,transparent 50%) 0 0/16px 10px,linear-gradient(225deg,#F0A500 50%,transparent 50%) 0 0/16px 10px}
+header .wrap{position:relative;z-index:1}
+@keyframes tw{0%,100%{opacity:.25}50%{opacity:1}}
+@keyframes sheen{0%{background-position:-160% 0}100%{background-position:260% 0}}
+.wrap{max-width:560px;margin:0 auto}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+h1{margin:0;font:900 26px/1 var(--display);letter-spacing:-.5px;background:var(--gold);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;filter:drop-shadow(2px 2px 0 #7A0A12)}
+.tag{font-size:12px;color:#fff;margin-left:8px;font-weight:700}
+.seg{display:flex;background:#8F0A14;border-radius:12px;padding:3px;box-shadow:inset 0 2px 4px rgba(0,0,0,.35)}
+.seg button{flex:1;border:0;background:none;color:#fff;padding:9px;border-radius:10px;font:800 14px var(--display);cursor:pointer}
+.seg button.on{background:var(--gold);color:var(--red-d);box-shadow:0 1px 0 #fff inset,0 2px 0 #B87900}
+.strip{background:linear-gradient(100deg,transparent 35%,rgba(255,255,255,.75) 50%,transparent 65%) 0 0/60% 100% no-repeat,linear-gradient(180deg,#FFC24A,#FF8A00);animation:sheen 4.2s linear infinite;color:var(--ink);text-align:center;font:900 12px/1 var(--display);letter-spacing:1px;padding:15px 8px 7px;margin-top:-10px;text-transform:uppercase}
+main{padding:8px 16px 16px}
+.sec{font:900 20px/1.1 var(--display);margin:14px 0 2px;text-transform:uppercase;letter-spacing:-.3px;background:linear-gradient(180deg,#FF4A55,#B3121E);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+input,select{width:100%;padding:12px;font:inherit;color:var(--ink);background:#fff;border:2px solid var(--orange);border-radius:12px}
+input:focus{outline:3px solid var(--yellow);border-color:var(--red)}
+.card{position:relative;background:linear-gradient(180deg,#fff 0%,#FFFBEA 100%);border:2px solid var(--ink);border-top:9px solid #F0A500;border-image:none;border-radius:14px;padding:14px;margin-top:16px;box-shadow:4px 4px 0 #F0A500,0 8px 14px rgba(120,60,0,.18)}
+.card::after{content:"";position:absolute;inset:0;border-radius:12px;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,0) 38%,rgba(255,236,150,.4) 50%,rgba(255,255,255,0) 62%)}
+.card:nth-of-type(3n+2){border-top-color:var(--red);box-shadow:4px 4px 0 var(--red-d),0 8px 14px rgba(120,0,10,.18)}
+.card:nth-of-type(3n){border-top-color:var(--orange);box-shadow:4px 4px 0 #E05E00,0 8px 14px rgba(120,60,0,.18)}
+.deal .hd b{padding-right:56px}
+.burst{position:absolute;top:-24px;right:-8px;width:66px;height:66px;background:radial-gradient(circle at 32% 28%,#FF7A82 0%,#E5202E 45%,#8F0A14 100%);color:#FFE86B;display:flex;align-items:center;justify-content:center;text-align:center;font:900 12px/1.05 var(--display);transform:rotate(12deg);z-index:1;clip-path:polygon(50% 0%,61% 12%,75% 5%,79% 20%,95% 20%,90% 35%,100% 50%,90% 62%,95% 80%,79% 80%,75% 95%,61% 88%,50% 100%,39% 88%,25% 95%,21% 80%,5% 80%,10% 62%,0% 50%,10% 35%,5% 20%,21% 20%,25% 5%,39% 12%);text-shadow:0 1px 0 #5A0610}
+.hd{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.hd b{font:900 16px/1.2 var(--display)}
+.r{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:5px 8px;margin:2px -8px;border-radius:8px;color:var(--mute)}
+.r span:last-child{color:var(--ink);font:900 16px var(--display);white-space:nowrap}
+.r.best{background:var(--gold);color:var(--ink);font-weight:700;box-shadow:0 0 0 1.5px #F0A500 inset,0 1px 0 #fff inset}
+.r.best span:last-child{color:var(--red-d);font-size:19px}
+.bt{background:var(--red-gloss);color:#FFE86B;font:900 10px var(--display);font-style:normal;padding:2px 6px;border-radius:5px;margin-left:6px;letter-spacing:.5px;vertical-align:2px;border:1px solid #8F0A14}
+.btn{border:2px solid var(--ink);background:linear-gradient(180deg,#fff,#FFF1B8);color:var(--ink);font:800 13px var(--display);padding:7px 12px;border-radius:10px;cursor:pointer;display:inline-block;box-shadow:0 2px 0 #C9A227}
+.btn:active{transform:translateY(2px);box-shadow:none}
+.btn.p{background:var(--red-gloss);border-color:#8F0A14;color:#FFE86B;width:100%;padding:13px;margin-top:12px;font-size:15px;box-shadow:0 1px 0 rgba(255,255,255,.45) inset,0 4px 0 #8F0A14;text-shadow:0 1px 0 #5A0610}
+.btn.p:active{box-shadow:0 1px 0 rgba(255,255,255,.45) inset,0 1px 0 #8F0A14;transform:translateY(3px)}
+[data-add]{background:var(--orange-gloss);border-color:var(--ink);color:#fff;box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 2px 0 #9A4200;text-shadow:0 1px 0 #7A3000}
+.sm{font-size:13px;color:var(--mute)}.good{color:var(--good)}.bad{color:var(--bad)}
+.r.best,.sm.good{font-weight:700}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.chip{border:2px solid var(--ink);background:linear-gradient(180deg,#fff,#FFF1B8);color:var(--ink);padding:7px 12px;border-radius:20px;font:700 14px "Trebuchet MS",system-ui,sans-serif;cursor:pointer}
+.chip.on{background:var(--red-gloss);border-color:#8F0A14;color:#FFE86B}
+.row2{display:flex;gap:10px;margin:12px 0}.row2>div{flex:1}
+.tot{display:flex;justify-content:space-between;padding:6px 8px;margin:2px -8px;border-radius:8px}.tot span:last-child{font:900 16px var(--display)}
+.tot.good{background:var(--gold);color:var(--red-d);box-shadow:0 0 0 1.5px #F0A500 inset}
+.qty{display:flex;align-items:center;gap:10px}.qty button{width:36px;height:36px;border-radius:50%;border:2px solid var(--ink);background:var(--gold);color:var(--ink);font:900 18px var(--display);cursor:pointer;box-shadow:0 2px 0 #B87900}
+.empty{color:var(--ink);text-align:center;padding:28px 14px;background:#fff;border:2px dashed #F0A500;border-radius:14px;margin-top:16px}
+hr{border:0;border-top:2px dashed var(--line);margin:12px 0}
+nav{position:fixed;bottom:0;left:0;right:0;background:var(--gold-flat);border-top:3px solid var(--red);box-shadow:0 -2px 0 #F0A500;display:flex;padding-bottom:env(safe-area-inset-bottom);z-index:5}
+nav button{flex:1;border:0;background:none;color:var(--ink);font:800 13px var(--display);padding:15px 4px 12px;cursor:pointer;position:relative}
+nav button.on{background:var(--red-gloss);color:#FFE86B;text-shadow:0 1px 0 #5A0610}
+nav button.on::after{content:"";position:absolute;top:5px;right:calc(50% - 26px);width:9px;height:9px;background:var(--star) center/contain no-repeat;animation:tw 2.4s ease-in-out infinite}
+#toast{position:fixed;left:50%;bottom:88px;transform:translateX(-50%);background:var(--ink);color:#FFE86B;padding:11px 18px;border-radius:12px;font-weight:700;font-size:14px;z-index:9;display:none;max-width:90%;border:2px solid #F0A500}
+#off{display:none;background:var(--ink);color:var(--yellow);text-align:center;font-size:13px;font-weight:700;padding:5px}
+.lnk{border:0;background:none;color:var(--red-d);text-decoration:underline;font:700 12px "Trebuchet MS",sans-serif;padding:8px 0 0;cursor:pointer}
+.card ul{margin:8px 0 0;padding-left:20px}.pr{font:900 15px var(--display);color:var(--red-d)}
+#welcome{position:fixed;inset:0;z-index:20;background:radial-gradient(circle at 50% 0%,#FF5A64 0%,#E5202E 45%,#8F0A14 100%);display:flex;align-items:center;justify-content:center;padding:24px;overflow:auto}
+#welcome::before{content:"";position:absolute;inset:0;pointer-events:none;background:var(--star) 12% 14%/18px no-repeat,var(--star) 84% 22%/24px no-repeat,var(--star) 20% 76%/14px no-repeat,var(--star) 78% 84%/18px no-repeat,var(--star) 50% 6%/10px no-repeat;animation:tw 3s ease-in-out infinite}
+.wbox{position:relative;max-width:380px;width:100%;color:#fff;text-align:center}.wbox ul{text-align:left;margin:14px auto;padding-left:22px}
+.wt{font:900 48px/1 var(--display);background:var(--gold);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;filter:drop-shadow(3px 3px 0 #5A0610);margin-bottom:10px}
+.hide{display:none!important}
+@media (prefers-reduced-motion:reduce){header::before,#welcome::before,.strip,nav button.on::after{animation:none}}
+</style>
+</head>
+<body>
+<div id="off">You're offline. Showing saved prices.</div>
+<header><div class="wrap">
+  <div class="top"><div><h1 style="display:inline">Mitengo</h1><span class="tag" id="src"></span></div><button class="btn hide" id="inst" style="color:var(--red-d);background:var(--yellow);border-color:var(--yellow)">Install app</button></div>
+  <div class="seg"><button id="bp">Personal</button><button id="bb">Business</button></div>
+</div></header>
+<div class="strip">Compare. Save. Shop smart.</div>
+<main class="wrap" id="view"></main>
+<nav id="nav"></nav>
+<div id="toast"></div>
+<div id="welcome" class="hide"><div class="wbox"><div class="wt">Mitengo</div><p>Find the cheapest shop and market prices in Zambia before you buy.</p>
+<ul><li>Compare prices across stores</li><li>Build a basket and see the cheapest total</li><li>Traders: check wholesale margins</li></ul>
+<button class="btn p" data-act="wacct">Create an account</button><button class="btn p" data-act="wacct" style="background:var(--yellow);color:var(--red-d);border-color:var(--yellow)">Sign in</button>
+<button class="lnk" data-act="wbrowse" style="color:var(--yellow);margin-top:14px">Browse without an account</button></div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4"></script>
+<script src="config.js"></script>
+<script>
+const CFG = window.CONFIG || {};
+const sb = (window.supabase && CFG.SUPABASE_URL && CFG.SUPABASE_ANON_KEY) ? window.supabase.createClient(CFG.SUPABASE_URL, CFG.SUPABASE_ANON_KEY) : null;
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const K = (n) => 'K' + (Math.round(n * 100) / 100).toLocaleString('en-US');
+const ls = { get: (k, d) => { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch (e) { return d; } }, set: (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} } };
+const toast = (m) => { const t = $('toast'); t.textContent = m; t.style.display = 'block'; clearTimeout(toast.t); toast.t = setTimeout(() => (t.style.display = 'none'), 3200); };
+
+// ---------- sample data (used until Supabase is connected) ----------
+const SAMPLE_STORES = ['Shoprite', 'Pick n Pay', 'Choppies', 'Soweto Market'];
+const SAMPLE = [
+  ['mealie', 'Mealie meal 25kg', { Shoprite: 285, 'Pick n Pay': 292, Choppies: 279, 'Soweto Market': 255 }, ['Bale of 2 x 25kg', 2, 500, 'Soweto Market']],
+  ['oil', 'Cooking oil 2L', { Shoprite: 98, 'Pick n Pay': 104, Choppies: 95, 'Soweto Market': 90 }, ['Carton of 6', 6, 520, 'Lusaka Depot']],
+  ['sugar', 'Sugar 2kg', { Shoprite: 62, 'Pick n Pay': 65, Choppies: 59, 'Soweto Market': 55 }, ['Bale of 10 x 2kg', 10, 520, 'Soweto Market']],
+  ['rice', 'Rice 2kg', { Shoprite: 74, 'Pick n Pay': 79, Choppies: 72, 'Soweto Market': 66 }, ['Bale of 10 x 2kg', 10, 620, 'Soweto Market']],
+  ['salt', 'Salt 1kg', { Shoprite: 14, 'Pick n Pay': 15, Choppies: 13, 'Soweto Market': 11 }, ['Carton of 24', 24, 245, 'Lusaka Depot']],
+  ['eggs', 'Eggs tray (30)', { Shoprite: 82, 'Pick n Pay': 85, Choppies: 80, 'Soweto Market': 72 }, ['Crate of 12 trays', 12, 820, 'Soweto Market']],
+  ['bread', 'Bread 700g', { Shoprite: 22, 'Pick n Pay': 24, Choppies: 21 }, null],
+  ['milk', 'Fresh milk 1L', { Shoprite: 31, 'Pick n Pay': 33, Choppies: 30 }, ['Crate of 12', 12, 330, 'Lusaka Depot']],
+].map(([id, name, prices, w]) => ({ id, name, prices, wholesale: w && { pack: w[0], units: w[1], price: w[2], where: w[3] } }));
+
+let STORES = [...SAMPLE_STORES], ITEMS = SAMPLE, storeIds = {}, source = 'sample';
+let S = ls.get('state', { mode: 'personal', basket: {}, watch: [], seen: {} });
+let tab = 'search', user = null, role = 'user';
+const F = { q: '', mItem: null, sell: '100', qty: '2', sItem: null, sStore: null, sPrice: '', rStore: null, rFile: null, rUrl: null, email: '', pw: '' };
+const save = () => ls.set('state', S);
+const best = (i) => Object.entries(i.prices).sort((a, b) => a[1] - b[1])[0];
+const byId = (id) => ITEMS.find((i) => i.id === id);
+
+// ---------- data loading ----------
+async function loadCatalog() {
+  if (sb) {
+    try {
+      const [st, it, pr, pk] = await Promise.all([
+        sb.from('stores').select('id,name').order('name'),
+        sb.from('items').select('id,name,cat').order('name'),
+        sb.from('latest_prices').select('item_id,store_id,price,created_at'),
+        sb.from('packs').select('item_id,pack,units,price,where_at'),
+      ]);
+      const err = st.error || it.error || pr.error || pk.error; if (err) throw err;
+      const sName = Object.fromEntries(st.data.map((s) => [s.id, s.name]));
+      const items = it.data.map((i) => {
+        const prices = {}, dates = {}; pr.data.filter((p) => p.item_id === i.id).forEach((p) => { prices[sName[p.store_id]] = Number(p.price); dates[sName[p.store_id]] = p.created_at; });
+        const k = pk.data.find((x) => x.item_id === i.id);
+        return { id: i.id, name: i.name, prices, dates, wholesale: k && { pack: k.pack, units: k.units, price: Number(k.price), where: k.where_at } };
+      }).filter((i) => Object.keys(i.prices).length);
+      STORES = st.data.map((s) => s.name); storeIds = Object.fromEntries(st.data.map((s) => [s.name, s.id])); ITEMS = items; source = 'live';
+      ls.set('catalog', { STORES, storeIds, ITEMS }); return;
+    } catch (e) {
+      const c = ls.get('catalog', null);
+      if (c) { ({ STORES, storeIds, ITEMS } = c); source = 'saved'; return; }
+    }
+  }
+  STORES = [...SAMPLE_STORES]; ITEMS = SAMPLE; storeIds = {}; source = 'sample';
+}
+async function refresh() { await loadCatalog(); $('src').textContent = source === 'sample' ? '(sample data)' : source === 'saved' ? '(saved prices)' : ''; render(); }
+
+// ---------- views ----------
+function tabs() {
+  return S.mode === 'personal'
+    ? [['search', 'Search'], ['basket', 'Basket'], ['watch', 'Watchlist'], ['more', 'Account']]
+    : [['search', 'Prices'], ['wholesale', 'Wholesale'], ['margin', 'Margin'], ['more', 'Account']];
+}
+function render() {
+  $('bp').classList.toggle('on', S.mode === 'personal'); $('bb').classList.toggle('on', S.mode === 'business');
+  if (tab !== 'plans' && !tabs().some((t) => t[0] === tab)) tab = tabs()[0][0];
+  $('nav').innerHTML = tabs().map(([k, l]) => `<button class="${tab === k || (tab === 'plans' && k === 'more') ? 'on' : ''}" data-tab="${k}">${l}</button>`).join('');
+  $('view').innerHTML = locked(tab) ? vLock() : { search: vSearch, basket: vBasket, watch: vWatch, wholesale: vWholesale, margin: vMargin, more: vMore, plans: vPlans }[tab]();
+  if (tab === 'search') drawList();
+  if (tab === 'margin') calc();
+}
+
+function vSearch() { return `<h2 class="sec">${S.mode === 'personal' ? 'Best buys right now' : 'Shop prices'}</h2><div class="sm">Prices are reported by scouts and shoppers and may be out of date. Check in store.</div><input id="q" style="margin-top:8px" type="search" placeholder="Search mealie meal, oil, sugar" value="${esc(F.q)}" aria-label="Search items"><div id="list"></div>`; }
+function drawList() {
+  const f = ITEMS.filter((i) => i.name.toLowerCase().includes(F.q.trim().toLowerCase()));
+  $('list').innerHTML = f.length ? f.map((i) => {
+    const [bs, bp] = best(i), mx = Math.max(...Object.values(i.prices)), n = S.basket[i.id];
+    const pct = Math.round((1 - bp / mx) * 100);
+    return `<div class="card deal">${pct > 0 ? `<div class="burst">SAVE<br>${pct}%</div>` : ''}<div class="hd"><b>${esc(i.name)}</b></div>
+    <div class="sm good" style="margin-bottom:4px">Cheapest: ${K(bp)} at ${esc(bs)} · save up to ${Math.round((1 - bp / mx) * 100)}%</div>` +
+      Object.entries(i.prices).sort((a, b) => a[1] - b[1]).map(([s, p]) => `<div class="r ${s === bs ? 'best' : ''}"><span>${esc(s)}${s === bs ? ' <em class="bt">BEST PRICE</em>' : ''}${i.dates && i.dates[s] ? ` <small class="sm">${ago(i.dates[s])}</small>` : ''}</span><span>${K(p)}</span></div>`).join('') +
+      `<button class="lnk" data-rep="${esc(i.id)}">Report a wrong price</button><hr><div class="hd"><button class="btn" data-add="${esc(i.id)}">Add to basket${n ? ' (' + n + ')' : ''}</button>` +
+      (S.mode === 'personal' ? `<button class="btn" data-watch="${esc(i.id)}">${S.watch.includes(i.id) ? 'Watching ✓' : 'Watch price'}</button>` : '') + '</div></div>';
+  }).join('') : `<div class="empty">No match for "${esc(F.q)}". Try a shorter word.</div>`;
+}
+
+function vBasket() {
+  const ids = Object.keys(S.basket).filter(byId);
+  if (!ids.length) return '<div class="empty">Your basket is empty. Add items from Search to compare the total cost at each store.</div>';
+  const full = STORES.map((s) => ({ s, miss: ids.filter((id) => byId(id).prices[s] == null).length, t: ids.reduce((a, id) => a + (byId(id).prices[s] || 0) * S.basket[id], 0) }));
+  const ok = full.filter((x) => !x.miss).sort((a, b) => a.t - b.t);
+  const split = ids.reduce((a, id) => a + best(byId(id))[1] * S.basket[id], 0);
+  return `<div class="card"><div class="hd"><b>Total by store</b><button class="btn" data-act="clear">Clear</button></div>` +
+    (ok.length ? ok.map((x, i) => `<div class="tot ${i === 0 ? 'good' : ''}"><span>${esc(x.s)}</span><span>${K(x.t)}</span></div>`).join('') +
+      `<div class="sm" style="margin-top:8px">Buying each item at its cheapest store: ${K(split)}${ok[0] ? ' (saves ' + K(ok[0].t - split) + ' vs ' + esc(ok[0].s) + ', but needs several trips)' : ''}.</div>` : '<div class="sm">No single store stocks every item in your basket.</div>') +
+    (ok.length < STORES.length ? '<div class="sm">Stores missing an item are hidden.</div>' : '') + '</div>' +
+    ids.map((id) => `<div class="card hd"><b>${esc(byId(id).name)}</b><div class="qty"><button data-q="${esc(id)}" data-d="-1" aria-label="Remove one">−</button><b>${S.basket[id]}</b><button data-q="${esc(id)}" data-d="1" aria-label="Add one">+</button></div></div>`).join('');
+}
+
+function vWatch() {
+  const items = ITEMS.filter((i) => S.watch.includes(i.id));
+  if (!items.length) return '<div class="empty">No watched items. Tap "Watch price" on any item to track it.</div>';
+  return '<h2 class="sec">Your watchlist</h2><div class="sm">Shows how each price has moved since you started watching. Push alerts need a server and are not included yet.</div>' + items.map((i) => {
+    const [s, p] = best(i), was = S.seen[i.id], d = was ? p - was : 0;
+    const note = !was || d === 0 ? 'No change since you added it' : d < 0 ? `<span class="good">Down ${K(-d)} since you added it</span>` : `<span class="bad">Up ${K(d)} since you added it</span>`;
+    return `<div class="card"><div class="hd"><b>${esc(i.name)}</b><button class="btn" data-watch="${esc(i.id)}">Remove</button></div><div class="good">${K(p)} at ${esc(s)}</div><div class="sm">${note}</div></div>`;
+  }).join('');
+}
+
+function vWholesale() {
+  const l = ITEMS.filter((i) => i.wholesale);
+  if (!l.length) return '<div class="empty">No wholesale packs yet.</div>';
+  return '<h2 class="sec">Bulk buys</h2>' + l.map((i) => {
+    const w = i.wholesale, u = w.price / w.units, rp = best(i)[1], c = u < rp;
+    return `<div class="card"><b>${esc(i.name)}</b><div class="r"><span>${esc(w.pack)}${w.where ? ' @ ' + esc(w.where) : ''}</span><span>${K(w.price)}</span></div>
+    <div class="r"><span>Cost per unit</span><span>${K(u)}</span></div><div class="r"><span>Cheapest retail unit</span><span>${K(rp)}</span></div>
+    <div class="${c ? 'good' : 'bad'}" style="margin-top:6px;font-weight:600">${c ? 'Wholesale is ' + Math.round((1 - u / rp) * 100) + '% below retail' : 'Retail is cheaper per unit here'}</div></div>`;
+  }).join('');
+}
+
+function vMargin() {
+  const l = ITEMS.filter((i) => i.wholesale);
+  if (!l.length) return '<div class="empty">No wholesale packs yet.</div>';
+  if (!l.some((i) => i.id === F.mItem)) F.mItem = l[0].id;
+  return `<div class="sm">Product</div><div class="chips">${l.map((i) => `<button class="chip ${i.id === F.mItem ? 'on' : ''}" data-m="${esc(i.id)}">${esc(i.name)}</button>`).join('')}</div>
+  <div class="card"><div class="sm" id="pack"></div><div class="row2">
+  <div><div class="sm">Selling price per unit (K)</div><input id="sell" type="number" inputmode="decimal" value="${esc(F.sell)}"></div>
+  <div><div class="sm">Packs to buy</div><input id="qty" type="number" inputmode="numeric" value="${esc(F.qty)}"></div></div><div id="out"></div></div>`;
+}
+function calc() {
+  const i = byId(F.mItem); if (!i || !$('out')) return; const w = i.wholesale, u = w.price / w.units;
+  $('pack').textContent = `${w.pack} costs ${K(w.price)}, which is ${K(u)} per unit. Cheapest shop price: ${K(best(i)[1])}.`;
+  const sp = parseFloat(F.sell), n = parseInt(F.qty, 10);
+  if (!(sp > 0) || !(n > 0)) { $('out').innerHTML = '<div class="sm bad">Enter a selling price and a number of packs above 0.</div>'; return; }
+  const pr = sp - u, c = pr >= 0 ? 'good' : 'bad';
+  $('out').innerHTML = `<div class="tot ${c}"><span>Margin</span><span>${(pr / sp * 100).toFixed(1)}%</span></div><div class="tot ${c}"><span>Profit per unit</span><span>${K(pr)}</span></div><div class="tot ${c}"><span>Profit if all sold</span><span>${K(pr * w.units * n)}</span></div>`;
+}
+
+const chips = (opts, val, attr) => `<div class="chips">${opts.map((o) => `<button class="chip ${o === val ? 'on' : ''}" ${attr}="${esc(o)}">${esc(o)}</button>`).join('')}</div>`;
+function vMore() {
+    if (!user) return `<div class="card"><b>Create your Mitengo account</b><div class="sm">Upload receipts and unlock plans.</div><div style="margin-top:10px"><input id="em" type="email" placeholder="name@company.com" autocomplete="email" value="${esc(F.email)}"></div>
+    <div style="margin-top:8px"><input id="pw" type="password" placeholder="Password, 8 or more characters" autocomplete="current-password" value="${esc(F.pw)}"></div>
+    <label class="sm" style="display:flex;gap:8px;margin-top:12px"><input type="checkbox" id="tc" ${F.tc ? 'checked' : ''} style="width:auto;margin-top:3px"><span>I am 18 or older and agree to the <a href="terms.html" target="_blank" rel="noopener">Terms</a> and <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</span></label><button class="btn p" data-act="signin">Sign in</button><div style="text-align:center;margin-top:12px"><button class="btn" data-act="signup">Create account</button></div></div>` + legalLinks();
+  return `<div class="card hd"><span class="sm">${esc(user.email)} · ${esc(role)}</span><button class="btn" data-act="signout">Sign out</button></div>${planCard()}
+  <div class="card"><b>Upload a receipt</b><div class="hd" style="margin:10px 0"><label class="btn">Take photo<input type="file" accept="image/*" capture="environment" id="rc1" class="hide"></label><label class="btn">Choose from gallery<input type="file" accept="image/*" id="rc2" class="hide"></label></div>
+  ${F.rUrl ? `<img src="${F.rUrl}" alt="Receipt preview" style="width:100%;max-height:260px;object-fit:cover;border-radius:8px"><div class="sm" style="margin-top:10px">Which store? (optional)</div>${chips(STORES, F.rStore, 'data-rs')}<button class="btn p" data-act="receipt">Submit receipt</button>` : '<div class="sm">Receipts are reviewed before any rewards are added.</div>'}</div>` +
+  (role === 'scout' || role === 'admin' ? `<div class="card"><b>Record a price</b><div class="sm" style="margin-top:8px">Item</div>${chips(ITEMS.map((i) => i.name), F.sItem, 'data-si')}
+  <div class="sm">Store or market</div>${chips(STORES, F.sStore, 'data-ss')}<div class="sm">Price (K)</div><input id="sp" type="number" inputmode="decimal" placeholder="285" value="${esc(F.sPrice)}"><button class="btn p" data-act="price">Save price</button></div>` : '<div class="sm" style="margin-top:12px">Price entry is for approved field scouts only.</div>') + legalCard();
+}
+
+// ---------- plans, legal, reports ----------
+const NOSB = 'Accounts need the backend. Add your Supabase keys in config.js.';
+const REQ = !!CFG.REQUIRE_SUBSCRIPTION;
+let subs = [];
+const PLANS = [
+  { id: 'free_hh', seg: 'household', name: 'Household free', price: 0, feat: ['Search and compare prices', 'Best buys right now'] },
+  { id: 'hh_week', seg: 'household', name: 'Household weekly', price: 5, per: 'week', feat: ['Everything in free', 'Basket totals by store', 'Watchlist with price movement'] },
+  { id: 'hh_month', seg: 'household', name: 'Household monthly', price: 18, per: 'month', feat: ['Everything in weekly', 'Receipt uploads'] },
+  { id: 'free_tr', seg: 'trader', name: 'Trader free', price: 0, feat: ['Browse shop prices'] },
+  { id: 'tr_month', seg: 'trader', name: 'Trader monthly', price: 120, per: 'month', feat: ['Wholesale and bulk pack prices', 'Margin calculator', 'Receipt uploads'] },
+  { id: 'tr_year', seg: 'trader', name: 'Trader annual', price: 1100, per: 'year', feat: ['Everything in monthly', '2 months free compared with paying monthly'] },
+];
+const PLAN = (id) => PLANS.find((p) => p.id === id);
+const activeSub = () => subs.find((s) => s.status === 'active' && new Date(s.expires_at) > new Date());
+const hasSub = (pre) => subs.some((s) => s.status === 'active' && new Date(s.expires_at) > new Date() && s.plan.startsWith(pre));
+const locked = (t) => REQ && ((['basket', 'watch'].includes(t) && !hasSub('hh_')) || (['wholesale', 'margin'].includes(t) && !hasSub('tr_')));
+const vLock = () => '<div class="empty"><b>Plan needed</b><div class="sm" style="margin:6px 0 10px">This feature is part of a paid plan.</div><button class="btn p" data-act="plans">See plans</button></div>';
+function ago(iso) {
+  const d = Math.floor((Date.now() - new Date(iso)) / 86400000);
+  return d < 1 ? 'today' : d === 1 ? 'yesterday' : d < 30 ? d + ' days ago' : 'over a month ago';
+}
+const legalLinks = () => '<div class="sm" style="text-align:center;margin-top:16px"><a href="terms.html" target="_blank" rel="noopener">Terms</a> &nbsp; <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a></div>';
+const legalCard = () => '<div class="card"><b>Your data</b><div class="sm" style="margin:6px 0 8px">Delete your account and every receipt you uploaded. This cannot be undone.</div><button class="btn" data-act="del" style="color:var(--bad)">Delete my account</button></div>' + legalLinks();
+function planCard() {
+  const a = activeSub(), pend = subs.find((s) => s.status === 'pending');
+  const t = a ? `${esc(PLAN(a.plan)?.name || a.plan)}, active until ${new Date(a.expires_at).toLocaleDateString()}` : pend ? 'Payment pending. Your plan switches on after we confirm your MoMo payment.' : 'Free plan';
+  return `<div class="card"><div class="hd"><b>Your plan</b><button class="btn" data-act="plans">See plans</button></div><div class="sm" style="margin-top:6px">${t}</div></div>`;
+}
+function vPlans() {
+  const seg = S.mode === 'personal' ? 'household' : 'trader', a = activeSub();
+  return `<h2 class="sec">${seg === 'household' ? 'Household plans' : 'Trader plans'}</h2>` +
+    (REQ ? '' : '<div class="empty" style="margin:8px 0 0">Pilot period: every feature is free right now. These plans show what paid access will cost.</div>') +
+    PLANS.filter((p) => p.seg === seg).map((p, x) => `<div class="card c${x % 3 + 1}"><div class="hd"><b>${p.name}</b><span class="pr">${p.price ? K(p.price) + ' / ' + p.per : 'Free'}</span></div><ul>${p.feat.map((f) => `<li>${f}</li>`).join('')}</ul>${p.price ? `<button class="btn p" data-sub="${p.id}">${a && a.plan === p.id ? 'Renew' : 'Choose'} ${p.name.toLowerCase()}</button>` : ''}</div>`).join('') +
+    (F.pay ? `<div class="card"><b>How to pay</b><div class="sm" style="margin-top:6px">Send ${K(PLAN(F.pay.plan).price)} by MTN or Airtel MoMo to <b>${esc(CFG.MOMO_NUMBER || '[add MOMO_NUMBER in config.js]')}</b>. Use the reference <b>${F.pay.ref}</b>. We switch on your plan after we confirm the payment.</div></div>` : '') +
+    '<div class="sm" style="margin-top:14px">Coming soon: price drop alerts, price history, PDF and Excel export, and automatic MoMo payments.</div>';
+}
+async function report(id) {
+  if (!user) { tab = 'more'; render(); return toast('Sign in to report a price.'); }
+  const note = prompt('Which store, and what price did you see?'); if (!note || !sb) return;
+  const { error } = await sb.from('reports').insert({ item_id: id, note: note.slice(0, 300), user_id: user.id });
+  toast(error ? 'Could not send: ' + error.message : 'Thanks. We will check this price.');
+}
+document.addEventListener('change', (e) => { if (e.target.id === 'tc') F.tc = e.target.checked; });
+
+// ---------- actions ----------
+async function setUser(u) {
+  user = u; role = 'user'; subs = [];
+  if (u && sb) { const { data } = await sb.from('profiles').select('role').eq('id', u.id).single(); role = data?.role || 'user'; const r = await sb.from('subscriptions').select('plan,status,expires_at,created_at').eq('user_id', u.id).order('created_at', { ascending: false }); subs = r.data || []; }
+  if (tab === 'more' || tab === 'plans' || REQ) render();
+}
+const A = {
+  plans() { tab = 'plans'; render(); },
+  wbrowse() { S.welcomed = 1; save(); $('welcome').classList.add('hide'); },
+  wacct() { A.wbrowse(); tab = 'more'; render(); },
+  async sub(id) {
+    if (!sb) return toast(NOSB);
+    if (!user) { tab = 'more'; render(); return toast('Create an account or sign in first.'); }
+    const { data, error } = await sb.from('subscriptions').insert({ user_id: user.id, plan: id }).select().single();
+    if (error) return toast('Could not start: ' + error.message);
+    subs = [data, ...subs]; F.pay = { plan: id, ref: String(data.id).slice(0, 6).toUpperCase() }; render();
+  },
+  async del() {
+    if (!confirm('Delete your account and all receipts you uploaded? This cannot be undone.')) return;
+    const { error } = await sb.rpc('delete_my_account'); if (error) return toast('Could not delete: ' + error.message);
+    await sb.auth.signOut(); toast('Your account was deleted.');
+  },
+  async signin() { if (!sb) return toast(NOSB); const { error } = await sb.auth.signInWithPassword({ email: F.email, password: F.pw }); if (error) toast(error.message); else { F.pw = ''; toast('Signed in'); } },
+  async signup() { if (!sb) return toast(NOSB); if (!F.tc) return toast('Tick the box to agree to the Terms and Privacy Policy.'); if (F.pw.length < 8) return toast('Use a password of 8 or more characters.'); const { data, error } = await sb.auth.signUp({ email: F.email, password: F.pw, options: { data: { accepted_terms_at: new Date().toISOString() } } }); if (error) toast(error.message); else if (!data.session) toast('Check your email to confirm, then sign in.'); },
+  async signout() { await sb.auth.signOut(); },
+  clear() { S.basket = {}; save(); render(); },
+  async receipt() {
+    try {
+      const path = `${user.id}/${Date.now()}.jpg`;
+      const up = await sb.storage.from('receipts').upload(path, F.rFile, { contentType: F.rFile.type || 'image/jpeg' }); if (up.error) throw up.error;
+      const ins = await sb.from('receipts').insert({ user_id: user.id, path, store_id: F.rStore ? storeIds[F.rStore] : null }); if (ins.error) throw ins.error;
+      F.rFile = null; F.rUrl = null; F.rStore = null; toast('Receipt received. It will be reviewed before any rewards are added.'); render();
+    } catch (e) { toast('Upload failed: ' + e.message); }
+  },
+  async price() {
+    const it = ITEMS.find((i) => i.name === F.sItem), p = parseFloat(F.sPrice);
+    if (!it || !F.sStore || !(p > 0)) return toast('Pick an item, a store, and enter a price above 0.');
+    const prev = it.prices[F.sStore];
+    if (prev && Math.abs(p - prev) / prev > 0.5 && !confirm(`Last price was K${prev}. You entered K${p}. Save anyway?`)) return;
+    const { error } = await sb.from('prices').insert({ item_id: it.id, store_id: storeIds[F.sStore], price: p, scout_id: user.id });
+    if (error) return toast('Not saved: ' + error.message);
+    F.sPrice = ''; toast(`Saved: ${it.name} at ${F.sStore}, K${p}`); await refresh();
+  },
+};
+
+document.addEventListener('click', (e) => {
+  const t = e.target.closest('button'); if (!t) return; const d = t.dataset;
+  if (t.id === 'bp' || t.id === 'bb') { S.mode = t.id === 'bp' ? 'personal' : 'business'; tab = 'search'; save(); return render(); }
+  if (d.tab) { tab = d.tab; return render(); }
+  if (d.add) { S.basket[d.add] = (S.basket[d.add] || 0) + 1; save(); drawList(); return toast('Added to basket'); }
+  if (d.watch) { const w = S.watch.includes(d.watch); S.watch = w ? S.watch.filter((x) => x !== d.watch) : [...S.watch, d.watch]; if (!w) S.seen[d.watch] = best(byId(d.watch))[1]; save(); return render(); }
+  if (d.q) { const n = Math.max(0, (S.basket[d.q] || 0) + Number(d.d)); if (n) S.basket[d.q] = n; else delete S.basket[d.q]; save(); return render(); }
+  if (d.m) { F.mItem = d.m; return render(); }
+  if (d.si) { F.sItem = F.sItem === d.si ? null : d.si; return render(); }
+  if (d.ss) { F.sStore = F.sStore === d.ss ? null : d.ss; return render(); }
+  if (d.rs) { F.rStore = F.rStore === d.rs ? null : d.rs; return render(); }
+  if (d.rep) return report(d.rep);
+  if (d.sub) return A.sub(d.sub);
+  if (d.act && A[d.act]) A[d.act]();
+});
+document.addEventListener('input', (e) => {
+  const id = e.target.id;
+  if (id === 'q') { F.q = e.target.value; drawList(); }
+  else if (id === 'sell') { F.sell = e.target.value; calc(); } else if (id === 'qty') { F.qty = e.target.value; calc(); }
+  else if (id === 'sp') F.sPrice = e.target.value; else if (id === 'em') F.email = e.target.value; else if (id === 'pw') F.pw = e.target.value;
+});
+document.addEventListener('change', (e) => {
+  if (e.target.id === 'rc1' || e.target.id === 'rc2') { const f = e.target.files[0]; if (!f) return; if (!/^image\//.test(f.type) || f.size > 5 * 1024 * 1024) return toast('Choose a photo under 5 MB.'); if (F.rUrl) URL.revokeObjectURL(F.rUrl); F.rFile = f; F.rUrl = URL.createObjectURL(f); render(); }
+});
+
+// ---------- PWA ----------
+let deferred = null;
+window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferred = e; $('inst').classList.remove('hide'); });
+$('inst').addEventListener('click', async () => { if (!deferred) return; deferred.prompt(); await deferred.userChoice; deferred = null; $('inst').classList.add('hide'); });
+window.addEventListener('appinstalled', () => $('inst').classList.add('hide'));
+const net = () => ($('off').style.display = navigator.onLine ? 'none' : 'block');
+window.addEventListener('online', () => { net(); refresh(); }); window.addEventListener('offline', net); net();
+if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+
+if (sb) { sb.auth.getSession().then(({ data }) => setUser(data.session?.user || null)); sb.auth.onAuthStateChange((_e, s) => setUser(s?.user || null)); }
+if (!S.welcomed) $('welcome').classList.remove('hide');
+render(); refresh();
+</script>
+</body>
+</html>
